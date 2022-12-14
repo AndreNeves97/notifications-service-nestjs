@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CoreModule } from '../../../../../core/core.module';
-import { PrismaNotificationsRepository } from '../../../../../domains/notifications/infra/repositories/prisma/prisma-notifications-repository';
+import { InMemoryNotificationsRepository } from '../../../infra/repositories/in-memory/in-memory-notifications-repository';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
 import { GetNotificationsUsecase } from './get-notifications.usecase';
 
@@ -14,7 +14,7 @@ describe('GetNotificationsUsecase', () => {
         GetNotificationsUsecase,
         {
           provide: NotificationsRepository,
-          useClass: PrismaNotificationsRepository,
+          useClass: InMemoryNotificationsRepository,
         },
       ],
     }).compile();
