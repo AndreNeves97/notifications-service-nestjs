@@ -1,32 +1,33 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { PrismaService } from '../../../../../core/external/datasources/prisma/prisma.service';
-import { randomUUID } from 'node:crypto';
+
 import { CreateNotificationRequest } from './request/create-notification-request';
+import { SendNotificationUsecase } from '../../../domain/usecases/send-notification/send-notification.usecase';
+import { GetNotificationsUsecase } from '../../../domain/usecases/get-notifications-usecase/get-notifications.usecase';
+import { Notification } from '../../../domain/entities/notification/notification';
 
 @Controller('notifications')
 export class NotificationsController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly getNotificationsUsecase: GetNotificationsUsecase,
+    private readonly sendNotificationUsecase: SendNotificationUsecase,
+  ) {}
 
   @Get()
-  findAll() {
-    return this.prisma.notification.findMany();
+  async findAll(): Promise<Array<Notification>> {
+    const { notifications } = await this.getNotificationsUsecase.execute();
+    return notifications;
   }
 
   @Post()
   async create(@Body() body: CreateNotificationRequest) {
-    console.log({ body });
-
     const { recipientId, content, category } = body;
 
-    const notification = await this.prisma.notification.create({
-      data: {
-        id: randomUUID(),
-        content,
-        category,
-        recipientId,
-      },
+    const { notification } = await this.sendNotificationUsecase.execute({
+      recipientId,
+      content,
+      category,
     });
 
-    return notification;
+    return { notification };
   }
 }

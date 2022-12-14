@@ -50,7 +50,7 @@ export class Notification extends BaseEntity<NotificationProps> {
     return this.props.readAt;
   }
 
-  public get createdAt(): Date | null | undefined {
+  public get createdAt(): Date {
     return this.props.createdAt;
   }
 }
