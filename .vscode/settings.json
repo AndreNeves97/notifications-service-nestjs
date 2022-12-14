@@ -1,5 +1,24 @@
 {
   "material-icon-theme.activeIconPack": "nest",
+  "material-icon-theme.folders.associations": {
+    "domain": "class",
+    "entities": "class",
+    "infra": "app",
+    "usecases": "functions",
+    "protocols": "contract",
+    "view-models": "views",
+    "presentation": "template",
+    "dtos": "typescript",
+    "http": "container",
+    "providers": "include",
+    "factories": "class",
+    "repositories": "mappings"
+  },
+
+  "material-icon-theme.files.associations": {
+    "*.usecase.ts": "nest-service"
+  },
+
   "[prisma]": {
     "editor.formatOnSave": true
   }
