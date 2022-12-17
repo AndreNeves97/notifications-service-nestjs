@@ -1,5 +1,5 @@
-import { Replace } from '../../../../../core/helpers/types/replace';
-import { BaseEntity } from '../../../../../core/domain/entities/base-entity';
+import { Replace } from '@core/helpers/types/replace';
+import { BaseEntity } from '@core/domain/entities/base-entity';
 import { NotificationContent } from './notification-content';
 
 export interface NotificationProps {
