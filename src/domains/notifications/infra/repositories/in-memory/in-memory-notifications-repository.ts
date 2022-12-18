@@ -8,11 +8,35 @@ export class InMemoryNotificationsRepository
 {
   private notifications: Notification[] = [];
 
+  async findAll() {
+    return this.notifications;
+  }
+
+  async findById(notificationId: string): Promise<Notification | null> {
+    const notification = this.notifications.find(
+      (notification) => notification.id === notificationId,
+    );
+
+    if (!notification) {
+      return null;
+    }
+
+    return notification;
+  }
+
   async create(notification: Notification) {
     this.notifications.push(notification);
   }
 
-  async findAll(): Promise<Notification[]> {
-    return this.notifications;
+  async save(notification: Notification) {
+    const notificationIndex = this.notifications.findIndex(
+      (item) => item.id === notification.id,
+    );
+
+    if (notificationIndex < 0) {
+      return;
+    }
+
+    this.notifications[notificationIndex] = notification;
   }
 }
