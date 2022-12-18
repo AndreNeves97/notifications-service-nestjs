@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { CreateNotificationRequest } from './request/create-notification-request';
 import { SendNotificationUsecase } from '../../../domain/usecases/send-notification/send-notification.usecase';
-import { GetNotificationsUsecase } from '../../../domain/usecases/get-notifications-usecase/get-notifications.usecase';
+import { GetNotificationsUsecase } from '../../../domain/usecases/get-notifications/get-notifications.usecase';
 import { NotificationProjection } from './response/notification-projection';
 import { NotificationsMapper } from './mappers/notifications-mapper';
 
