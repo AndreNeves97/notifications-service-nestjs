@@ -1,4 +1,4 @@
-import { Notification } from '../entities/notification/notification';
+import { Notification } from '../entities/notification/notification.entity';
 
 export abstract class NotificationsRepository {
   abstract findAll(): Promise<Array<Notification>>;

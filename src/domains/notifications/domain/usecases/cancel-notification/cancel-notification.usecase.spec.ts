@@ -1,6 +1,6 @@
 import { InMemoryNotificationsRepository } from '@domains/notifications/infra/repositories/in-memory/in-memory-notifications-repository';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Notification } from '../../entities/notification/notification';
+import { Notification } from '../../entities/notification/notification.entity';
 import { NotificationContent } from '../../entities/notification/notification-content';
 import { NotificationNotFoundError } from '../../errors/notification-not-found-error';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
