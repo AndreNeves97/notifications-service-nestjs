@@ -3,7 +3,16 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateNotificationRequest } from './request/create-notification-request';
 import { SendNotificationUsecase } from '../../../domain/usecases/send-notification/send-notification.usecase';
 import { GetNotificationsUsecase } from '../../../domain/usecases/get-notifications-usecase/get-notifications.usecase';
-import { Notification } from '../../../domain/entities/notification/notification';
+import { NotificationProjection } from './response/notification-projection';
+import { NotificationsMapper } from './mappers/notifications-mapper';
+
+interface SingleResponse {
+  notification: NotificationProjection;
+}
+
+interface ListResponse {
+  notifications: Array<NotificationProjection>;
+}
 
 @Controller('notifications')
 export class NotificationsController {
@@ -13,21 +22,26 @@ export class NotificationsController {
   ) {}
 
   @Get()
-  async findAll(): Promise<Array<Notification>> {
+  async findAll(): Promise<ListResponse> {
     const { notifications } = await this.getNotificationsUsecase.execute();
-    return notifications;
+
+    return {
+      notifications: notifications.map(NotificationsMapper.toProjection),
+    };
   }
 
   @Post()
-  async create(@Body() body: CreateNotificationRequest) {
-    const { recipientId, content, category } = body;
+  async create(
+    @Body() body: CreateNotificationRequest,
+  ): Promise<SingleResponse> {
+    const newNotification = NotificationsMapper.fromRequest(body);
 
     const { notification } = await this.sendNotificationUsecase.execute({
-      recipientId,
-      content,
-      category,
+      notification: newNotification,
     });
 
-    return { notification };
+    return {
+      notification: NotificationsMapper.toProjection(notification),
+    };
   }
 }

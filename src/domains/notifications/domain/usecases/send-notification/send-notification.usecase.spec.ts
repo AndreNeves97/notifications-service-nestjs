@@ -23,10 +23,14 @@ describe('SendNotificationUsecase', () => {
   });
 
   it('should be able to send a notification', async () => {
-    const { notification } = await usecase.execute({
-      content: 'This is a notification',
-      category: 'social',
+    const newNotification = new Notification({
       recipientId: 'example-id',
+      content: new NotificationContent('This is a notification'),
+      category: 'social',
+    });
+
+    const { notification } = await usecase.execute({
+      notification: newNotification,
     });
 
     expect(notification).toBeTruthy();
