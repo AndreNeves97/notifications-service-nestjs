@@ -1,4 +1,4 @@
-import { Notification } from '@domains/notifications/domain/entities/notification/notification';
+import { Notification } from '@domains/notifications/domain/entities/notification/notification.entity';
 import { NotificationContent } from '@domains/notifications/domain/entities/notification/notification-content';
 
 import { CreateNotificationRequest } from '../request/create-notification-request';

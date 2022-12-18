@@ -1,4 +1,4 @@
-import { Notification } from '@domains/notifications/domain/entities/notification/notification';
+import { Notification } from '@domains/notifications/domain/entities/notification/notification.entity';
 
 export class PrismaNotificationMapper {
   static toPrisma(notification: Notification) {
