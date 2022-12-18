@@ -1,3 +1,5 @@
+import { ContentLengthError } from '../../errors/content-length-error';
+
 export class NotificationContent {
   private readonly content: string;
 
@@ -13,7 +15,7 @@ export class NotificationContent {
     const isContentLengthValid = this.validateContentLength(content);
 
     if (!isContentLengthValid) {
-      throw new Error('Content length error.');
+      throw new ContentLengthError();
     }
 
     this.content = content;
