@@ -1,5 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { InMemoryNotificationsRepository } from '../../../infra/repositories/in-memory/in-memory-notifications-repository';
+import { Notification } from '../../entities/notification/notification';
+
+import { NotificationContent } from '../../entities/notification/notification-content';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
 import { SendNotificationUsecase } from './send-notification.usecase';
 
