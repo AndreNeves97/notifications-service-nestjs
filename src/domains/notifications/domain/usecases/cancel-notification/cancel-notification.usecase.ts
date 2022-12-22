@@ -1,3 +1,4 @@
+import { BaseUsecase } from '@core/domain/usecases/base-usecase';
 import { Injectable } from '@nestjs/common';
 import { NotificationNotFoundError } from '../../errors/notification-not-found-error';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
@@ -9,7 +10,9 @@ interface CancelNotificationRequest {
 type CancelNotificationResponse = void;
 
 @Injectable()
-export class CancelNotificationUsecase {
+export class CancelNotificationUsecase
+  implements BaseUsecase<CancelNotificationRequest, CancelNotificationResponse>
+{
   constructor(
     private readonly notificationsRepository: NotificationsRepository,
   ) {}

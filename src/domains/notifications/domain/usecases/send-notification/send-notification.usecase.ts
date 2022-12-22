@@ -1,3 +1,4 @@
+import { BaseUsecase } from '@core/domain/usecases/base-usecase';
 import { Injectable } from '@nestjs/common';
 import { Notification } from '../../entities/notification/notification.entity';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
@@ -11,7 +12,9 @@ interface SendNotificationResponse {
 }
 
 @Injectable()
-export class SendNotificationUsecase {
+export class SendNotificationUsecase
+  implements BaseUsecase<SendNotificationRequest, SendNotificationResponse>
+{
   constructor(
     private readonly notificationsRepository: NotificationsRepository,
   ) {}
