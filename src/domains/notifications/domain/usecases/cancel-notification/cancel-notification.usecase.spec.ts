@@ -1,10 +1,9 @@
 import { InMemoryNotificationsRepository } from '@domains/notifications/infra/repositories/in-memory/in-memory-notifications-repository';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Notification } from '../../entities/notification/notification.entity';
-import { NotificationContent } from '../../entities/notification/notification-content';
 import { NotificationNotFoundError } from '../../errors/notification-not-found-error';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
 import { CancelNotificationUsecase } from './cancel-notification.usecase';
+import { NotificationFactory } from '../../factories/notification-factory/notification-factory';
 
 describe('CancelNotificationUsecase', () => {
   let usecase: CancelNotificationUsecase;
@@ -30,11 +29,7 @@ describe('CancelNotificationUsecase', () => {
   });
 
   it('should be able to cancel a notification', async () => {
-    const notification = new Notification({
-      recipientId: 'example-id',
-      content: new NotificationContent('This is a notification'),
-      category: 'social',
-    });
+    const notification = NotificationFactory.makeMock();
 
     await repository.create(notification);
 

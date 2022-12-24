@@ -1,7 +1,6 @@
 import { InMemoryNotificationsRepository } from '@domains/notifications/infra/repositories/in-memory/in-memory-notifications-repository';
 import { Test, TestingModule } from '@nestjs/testing';
-import { NotificationContent } from '../../entities/notification/notification-content';
-import { Notification } from '../../entities/notification/notification.entity';
+import { NotificationFactory } from '../../factories/notification-factory/notification-factory';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
 import { CountRecipientNotificationsUsecase } from './count-recipient-notifications-usecase';
 
@@ -32,22 +31,14 @@ describe('CountRecipientNotificationsUsecase', () => {
 
   it('should be able to count recipient notifications', async () => {
     const notifications = [
-      new Notification({
+      NotificationFactory.makeMock({
         recipientId: 'example-recipient-id',
-        content: new NotificationContent('This is a notification'),
-        category: 'social',
       }),
-      new Notification({
+      NotificationFactory.makeMock({
         recipientId: 'example-recipient-id',
-        content: new NotificationContent('This is another notification'),
-        category: 'social',
       }),
-      new Notification({
+      NotificationFactory.makeMock({
         recipientId: 'new-recipient-id',
-        content: new NotificationContent(
-          'This is a notification for another recipient',
-        ),
-        category: 'social',
       }),
     ];
 
