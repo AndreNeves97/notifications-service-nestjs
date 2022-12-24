@@ -47,6 +47,10 @@ export class Notification extends BaseEntity<NotificationProps> {
     this.props.readAt = new Date();
   }
 
+  public unread() {
+    this.props.readAt = null;
+  }
+
   public get readAt(): Date | null | undefined {
     return this.props.readAt;
   }
