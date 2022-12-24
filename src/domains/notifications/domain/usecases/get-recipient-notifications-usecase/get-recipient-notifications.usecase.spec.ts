@@ -2,7 +2,7 @@ import { InMemoryNotificationsRepository } from '@domains/notifications/infra/re
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotificationFactory } from '../../factories/notification-factory/notification-factory';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
-import { GetRecipientNotificationsUsecase } from './get-recipient-notifications-usecase';
+import { GetRecipientNotificationsUsecase } from './get-recipient-notifications.usecase';
 
 describe('GetRecipientNotificationsUsecase', () => {
   let usecase: GetRecipientNotificationsUsecase;
