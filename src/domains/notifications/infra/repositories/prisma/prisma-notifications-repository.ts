@@ -40,6 +40,7 @@ export class PrismaNotificationsRepository implements NotificationsRepository {
     const notifications = await this.notifications.findMany({
       where: {
         recipientId,
+        canceledAt: null,
       },
       orderBy: {
         createdAt: 'asc',
@@ -53,6 +54,7 @@ export class PrismaNotificationsRepository implements NotificationsRepository {
     const count = await this.notifications.count({
       where: {
         recipientId,
+        canceledAt: null,
       },
     });
 
