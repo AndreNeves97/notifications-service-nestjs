@@ -1,8 +1,8 @@
 import { Notification } from '../entities/notification/notification.entity';
 
 export abstract class NotificationsRepository {
-  abstract findAll(): Promise<Array<Notification>>;
   abstract findById(notificationId: string): Promise<Notification | null>;
+  abstract findAll(): Promise<Array<Notification>>;
   abstract findManyByRecipientId(
     recipientId: string,
   ): Promise<Array<Notification>>;
