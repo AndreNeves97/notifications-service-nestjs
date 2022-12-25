@@ -1,8 +1,10 @@
-import { Replace } from '@core/helpers/types/replace';
 import { BaseEntity } from '@core/domain/entities/base-entity';
+import { Replace } from '@core/helpers/types/replace';
+import { randomUUID } from 'node:crypto';
 import { NotificationContent } from './notification-content';
 
 export interface NotificationProps {
+  id: string;
   recipientId: string;
   content: NotificationContent;
   category: string;
@@ -11,10 +13,16 @@ export interface NotificationProps {
   createdAt: Date;
 }
 
+export interface OptionalConstructorArgs {
+  id?: string;
+  createdAt?: Date;
+}
+
 export class Notification extends BaseEntity<NotificationProps> {
-  constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
+  constructor(props: Replace<NotificationProps, OptionalConstructorArgs>) {
     super({
       ...props,
+      id: props.id ?? randomUUID(),
       createdAt: props.createdAt ?? new Date(),
     });
   }

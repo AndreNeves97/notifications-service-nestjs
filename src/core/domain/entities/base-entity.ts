@@ -1,17 +1,16 @@
-import { randomUUID } from 'node:crypto';
+interface BaseProps {
+  id: string;
+  createdAt: Date;
+}
 
-export class BaseEntity<T> {
-  private _id: string;
-
+export abstract class BaseEntity<T extends BaseProps> {
   protected props: T;
 
   constructor(props: T) {
-    this._id = randomUUID();
-
     this.props = props;
   }
 
   public get id(): string {
-    return this._id;
+    return this.props.id;
   }
 }
