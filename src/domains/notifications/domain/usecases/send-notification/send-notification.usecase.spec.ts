@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { InMemoryNotificationsRepository } from '../../../infra/repositories/in-memory/in-memory-notifications-repository';
-import { Notification } from '../../entities/notification/notification.entity';
 
-import { NotificationContent } from '../../entities/notification/notification-content';
 import { NotificationsRepository } from '../../repositories/notifications-repository.interface';
 import { SendNotificationUsecase } from './send-notification.usecase';
+import { NotificationFactory } from '../../factories/notification-factory/notification-factory';
 
 describe('SendNotificationUsecase', () => {
   let usecase: SendNotificationUsecase;
@@ -26,11 +25,7 @@ describe('SendNotificationUsecase', () => {
   });
 
   it('should be able to send a notification', async () => {
-    const newNotification = new Notification({
-      recipientId: 'example-id',
-      content: new NotificationContent('This is a notification'),
-      category: 'social',
-    });
+    const newNotification = NotificationFactory.makeMock();
 
     const { notification } = await usecase.execute({
       notification: newNotification,
