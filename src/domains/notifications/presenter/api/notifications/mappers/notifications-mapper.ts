@@ -3,6 +3,7 @@ import { NotificationContent } from '@domains/notifications/domain/entities/noti
 
 import { CreateNotificationRequest } from '../request/create-notification-request';
 import { NotificationProjection } from '../response/notification-projection';
+import { NotificationPublicProjection } from '../response/notification-public-projection';
 
 export class NotificationsMapper {
   public static fromRequest(request: CreateNotificationRequest): Notification {
@@ -18,6 +19,20 @@ export class NotificationsMapper {
   public static toProjection(
     notification: Notification,
   ): NotificationProjection {
+    return {
+      id: notification.id,
+      recipientId: notification.recipientId,
+      category: notification.category,
+      content: notification.content.value,
+      readAt: notification.readAt,
+      canceledAt: notification.canceledAt,
+      createdAt: notification.createdAt,
+    };
+  }
+
+  public static toPublicProjection(
+    notification: Notification,
+  ): NotificationPublicProjection {
     return {
       id: notification.id,
       recipientId: notification.recipientId,
